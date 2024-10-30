@@ -122,26 +122,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\Circle.h" />
     <ClInclude Include="..\src\Figure.h" />
-    <ClInclude Include="..\src\Line.h" />
     <ClInclude Include="..\src\Main.h" />
-    <ClInclude Include="..\src\Quad.h" />
     <ClInclude Include="..\src\UserInterface.h" />
-    <ClInclude Include="Elipse.h" />
-    <ClInclude Include="Curve.h" />
-    <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Circle.cpp" />
     <ClCompile Include="..\src\Figure.cpp" />
-    <ClCompile Include="..\src\Line.cpp" />
     <ClCompile Include="..\src\Main.cpp" />
-    <ClCompile Include="..\src\Quad.cpp" />
     <ClCompile Include="..\src\UserInterface.cpp" />
-    <ClCompile Include="Curve.cpp" />
-    <ClCompile Include="Elipse.cpp" />
-    <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
