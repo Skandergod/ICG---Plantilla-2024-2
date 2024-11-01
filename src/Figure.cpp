@@ -5,6 +5,7 @@ CFigure::CFigure()
 {
 	mColor[0] =  1.0f;
 	mColor[1] = mColor[2] = 0.f;
+	mType = 0;
 }
 
 CFigure::~CFigure()

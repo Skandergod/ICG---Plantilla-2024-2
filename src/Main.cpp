@@ -1,12 +1,8 @@
 #include "Main.h"
-#include "Line.h"
-#include "Quad.h"
-#include "Circle.h"
+#include "Figure.h"
 #include "UserInterface.h"
-#include "../ICG - Plantilla/Triangle.h"
-#include "../ICG - Plantilla/Elipse.h"
 #include <iostream>
-#include "../ICG - Plantilla/Curve.h"
+#include "../headers/glfw3.h"
 using std::vector;
 
 GLFWwindow *gWindow;
@@ -15,16 +11,14 @@ bool gPress;
 CUserInterface * userInterface;
 vector <CFigure *> figures;
 FigureType figureSelected;
-int picked;
 float ax1, ay1;
 float cax1, cay1, cax2, cay2, cax3, cay3;
 int nCurves = 0;
-float nCurvesPoints[20][20];
 bool fill;
 
 void display()
 {
-	glClearColor(userInterface->getrbackground(), userInterface->getgbackground(), userInterface->getbbackground(), 1.0);
+	glClearColor(255, 255, 255, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	for (unsigned int i = 0; i < figures.size(); i++)
@@ -46,22 +40,11 @@ void keyInput(GLFWwindow *window, int key, int scancode, int action, int mods)
 		case GLFW_KEY_I:
 			std::cout << "esto es una prueba \n";
 			break;
-		case GLFW_KEY_F:
-			if (fill) {
-				fill = 0;
-			}
-			else {
-				fill = 1;
-			}
-			break;
-
 		case GLFW_KEY_U:
 			figureSelected = NONE;
 			//userInterface->hide();
 			break;
-
 		case GLFW_KEY_KP_SUBTRACT:
-
 			userInterface->hide();
 			break;
 		}
@@ -77,8 +60,20 @@ void mouseButton(GLFWwindow* window, int button, int action, int mods)
 
 	double x, y;
 	glfwGetCursorPos(gWindow, &x, &y);
-	
 
+
+	int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+
+	if (state == GLFW_PRESS)
+	{
+		std::cout << "X: " << x << " Y: " << y << std::endl;
+		glColor3f(255.0, 0.0, 0.0);
+		glBegin(GL_POINTS);
+		glPointSize(5);
+		glVertex2d(x, y);
+		glEnd();
+	
+	}
 
 }
 
@@ -89,9 +84,27 @@ void cursorPos(GLFWwindow* window, double x, double y)
 
 	if (gPress)
 	{
+
+
 		
 	}
 }
+
+void reshape(GLFWwindow* window, int width, int height)
+{
+	gWidth = width;
+	gHeight = height;
+
+	glViewport(0, 0, gWidth, gHeight);
+
+	userInterface->reshape();
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	glOrtho(0, gWidth, 0, gHeight, -1.0f, 1.0f);
+}
+
 
 void charInput(GLFWwindow* window, unsigned int scanChar)
 {
@@ -152,7 +165,6 @@ int main(void)
 	gWidth = 1200;
 	gHeight = 680;
 	gPress = false;
-	picked = -1;
 
 	if (!initGlfw() || !initUserInterface())
 		return EXIT_FAILURE;
@@ -165,11 +177,8 @@ int main(void)
 	while (!glfwWindowShouldClose(gWindow))
 	{
 		display();
-
 		
 		TwDraw();
-
-		updateUserInterface();
 
 		glfwSwapBuffers(gWindow);
 

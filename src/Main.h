@@ -4,10 +4,6 @@
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
 
-int pick(int x, int y);
-
-void updateUserInterface();
-
 void display();
 
 void reshape(GLFWwindow *window, int width, int height);
