@@ -23,12 +23,13 @@ public:
 	int nVer;
 
 public:
-	CFigure();
+	CFigure(int nVertices);
 	virtual ~CFigure();
 	void setVertex(int id, float x, float y);
 	void setColor(float r, float g, float b);
-	virtual void display() = 0;
+	//virtual void display() = 0;
 	int getType();
 	float* getVertex(int id);
 	float* getColor();
+	void draw();
 };

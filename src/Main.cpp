@@ -18,11 +18,13 @@ bool fill;
 
 void display()
 {
-	glClearColor(255, 255, 255, 1.0);
+	glClearColor(255.0, 255.0, 255.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	glPointSize(5);
+
 	for (unsigned int i = 0; i < figures.size(); i++)
-		figures[i]->display();
+		figures[i]->draw();
 }
 
 void keyInput(GLFWwindow *window, int key, int scancode, int action, int mods)
@@ -66,12 +68,13 @@ void mouseButton(GLFWwindow* window, int button, int action, int mods)
 
 	if (state == GLFW_PRESS)
 	{
-		std::cout << "X: " << x << " Y: " << y << std::endl;
-		glColor3f(255.0, 0.0, 0.0);
-		glBegin(GL_POINTS);
-		glPointSize(5);
-		glVertex2d(x, y);
-		glEnd();
+
+		float ax = float(x);
+		float ay = gHeight - float(y);
+		CFigure *pixel;
+		pixel = new CFigure(1);
+		pixel->setVertex(0, ax, ay);
+		figures.push_back(pixel);
 	
 	}
 
@@ -183,6 +186,8 @@ int main(void)
 		glfwSwapBuffers(gWindow);
 
 		glfwPollEvents();
+
+
 	}
 
 	destroy();
