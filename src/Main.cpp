@@ -40,7 +40,7 @@ void keyInput(GLFWwindow *window, int key, int scancode, int action, int mods)
 			glfwSetWindowShouldClose(window, GL_TRUE);
 			break;
 		case GLFW_KEY_I:
-			std::cout << "esto es una prueba \n";
+			std::cout << "esto es una prueba \n";	
 			break;
 		case GLFW_KEY_U:
 			figureSelected = NONE;
